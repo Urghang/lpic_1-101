@@ -50,5 +50,17 @@ sudo mkfs.ext4 /dev/vg-1/lv-1
 sudo mkfs.ext4 /dev/vg-1/lv-2
 
 6) Попробовать переносить тома с одного жесткого диска на другой без остановки ОС.
+sudo pvcreate /dev/sdc2
+sudo pvcreate /dev/sdd2
+sudo vgextend vg-1 /dev/sdc2
+sudo vgextend vg-1 /dev/sdd2
+sudo pvmove /dev/sdc1
+sudo vgreduce vg-1 /dev/sdc1
+sudo pvremove /dev/sdc1
+sudo pvmove /dev/sdd1
+sudo vgreduce vg-1 /dev/sdd1
+sudo pvremove /dev/sdd1
 
 7) Определить точную версию ядра ОС.
+uname -a
+uname -r
