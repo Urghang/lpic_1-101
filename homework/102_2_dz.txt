@@ -8,4 +8,18 @@ GRUB_TIMEOUT=10
 GRUB_DISTRIBUTOR="This my OS"
 
 3) Попробовать подключить жесткий диск с Windows и указать вашему загрузчкику на возможность загружаться с добавленного диска.
+sudo update-grub
+если grub не добавит windows в загрузку, то это может означать,
+что установлен параметр GRUB_DISABLE_OS_PROBER=true.
+искать его надо в файле /etc/default/grub.d/50-curtin-settings.cfg,
+установить его в false и снова запустить команду sudo update-grub.
+Так же можно в ручную добавить строки для загрузки в файл /etc/grub.d/40-custom
+menuentry "Windows 7" {
+  set root=(hd1,0)
+  chainloader +1
+
 4) Установить загрузку Windows опцией по умолчанию.
+sudo vi /etc/default/grub
+GRUB_DEFAULT=2 (номер строчки основного меню загрузчика, счет начиается с 0)
+или вместо номера строчки имя параметра
+GRUB_DEFAULT="Windows 7 (on /dev/sdb1)"
