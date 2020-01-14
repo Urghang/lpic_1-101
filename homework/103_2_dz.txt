@@ -21,15 +21,22 @@ sort /любой/журнал
 uniq /var/log/syslog
 
 7) Вывести из журналов событий только события входа в систему в отдельный файл.
-grep "session opened" /var/log/auth.log > file.txt
-sed -n '/session opened/p' /var/log/auth.log > file.txt
+grep "session opened" /var/log/auth.log | tr -s ' ' > file.txt
+sed -n '/session opened/p' /var/log/auth.log | tr -s ' ' > file.txt
 
 выриант с выбором пользователей из /etc/passwd
 cut -d':' -f 1 /etc/passwd > users.txt
-grep "session opened" /var/log/auth.log| grep user | grep -w -f users.txt > file.txt
+grep "session opened" /var/log/auth.log| grep user | grep -w -f users.txt | tr -s ' ' > file.txt
 
 8) Из созданного файла создать несколько файлов по событиям входа каждого отдельного пользователя (на каждого пользователя свой журнал).
+grep "for user root" file.txt > root_file.txt
+grep "for user aleks" file.txt > aleks_file.txt
 
+sed -n '/for user root/p' file.txt > root_file.txt
+sed -n '/for user aleks/p' file.txt > aleks_file.txt
 
 9) Отсортируйте информацию так, чтоб был виден только логин и время входа/выхода.
+cut -f ' ' -d 1-3,11 file.txt
+
 10) Замените в созданных файлах логин на полное имя пользователя.
+sed -i -e 's/root/root@ubuntu/' -e 's/aleks/aleks@ubuntu/' file.txt
