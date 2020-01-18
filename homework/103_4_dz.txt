@@ -13,4 +13,5 @@ pOng r0.ru 2> error.txt
 ping -c 10 it-semaev.ru | tee ping.txt
 
 5) Вывести результат команды ping it-semaev.ru в консоль, отображая только последние пять символов каждой строки..
-ping -c 10 it-semaev.ru | sed -r 's/.+(.....)$/\1/'
+ping -c 10 it-semaev.ru | sed -r 's/.*(.....)$/\1/'
+ping -c 10 it-semaev.ru | sed -r 's/.*(.{5})$/\1/'
