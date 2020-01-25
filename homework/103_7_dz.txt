@@ -24,4 +24,5 @@ egrep -r '^[0-9]' /var/log/
 egrep -r '^\w' /var/log/
 
 6) Сохранить строчки лога, содержащие ваш логин, как отдельный файл, заменив при этом логин на слово "His Majesty".
-rgrep aleks /var/log | sed -e 's/aleks/His Majesty/' > file2.txt
+rgrep -E '[Uu]sername' /var/log | sed -e 's/[Uu]sername/His Majesty/g' > file2.txt
+флаг g обработает все вхождения в строке.
