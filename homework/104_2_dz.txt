@@ -11,8 +11,22 @@ sudo fsck -t ntfs /dev/sdc1
 sudo ntfsfix /dev/sdc1
 
 4) Вывести информацию о томе NTFS в отдельный файл.
+sudo ntfsinfo -m -f /dev/sdc1 > ntfsinfo.txt
 
 5) Попробовать выключить журнал на томе NTFS.
+пока не нашел инфы ((
+
 6) Попробовать удалить и восстановить информацию на томе NTFS.
+sudo mkdir /mnt/hard /undelete
+sudo mount /dev/sdc1 /mnt/hard
+sudo echo 'Hello, world!' > /mnt/hard/text.txt
+sudo rm /mnt/hard/text.txt
+sudo umount /mnt/hard
+sudo ntfsundelete -f /dev/sdc1
+sudo ntfsundelete /dev/sdc1 -f -u -i 64 -d /undelete
+
 7) Посмотреть количество свободного места на этом томе.
+df -h /dev/sdc1
+
 8) Посмотреть занятое место на этом томе.
+df -h /dev/sdc1
