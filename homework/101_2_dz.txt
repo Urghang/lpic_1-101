@@ -14,3 +14,4 @@ journalctl -k
 5) Узнать какой из стилей инициализации используется в вашей ОС.
 pstree -> systemd
 cat /etc/inittab
+ps -p 1 -o comm=
